@@ -26,5 +26,12 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
+router.beforeEach(function(to, from, next) {
+  if (to.meta.title) {
+    // || store.state.title
+    Vue.refreshTitle(to.meta.title); //|| store.state.title
+  }
+  next();
+});
 
 export default router;
