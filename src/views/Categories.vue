@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <nut-navbar @on-click-back="back" title="首页" :rightShow="false">
+    <nut-navbar @on-click-back="back" title="全部分类" :rightShow="false">
       <a slot="center" @click="search">编辑</a>
     </nut-navbar>
     <div class="content">
@@ -20,27 +20,8 @@
         </nut-tab-panel>
       </nut-tab>
     </div>
-    <footer class="footerFixed">
-      <nut-buttongroup type="menu">
-        <nut-button type="light" icon="action" color="#f00">
-          首页
-        </nut-button>
-        <nut-button type="light" icon="more" color="#f00">
-          全部分类
-        </nut-button>
-        <nut-button type="light" icon="search" color="#f00">
-          分销中心
-        </nut-button>
-        <nut-badge value="2" top="0.5rem" right="2rem">
-          <nut-button type="light" icon="trolley" color="#f00">
-            购物车
-          </nut-button>
-        </nut-badge>
-        <nut-button type="light" icon="search" color="#f00">
-          会员中心
-        </nut-button>
-      </nut-buttongroup>
-    </footer>
+    <nut-tabbar @tab-switch="tabSwitch3" :tabbar-list="tabList3" :bottom="true">
+    </nut-tabbar>
   </div>
 </template>
 
@@ -49,6 +30,54 @@ export default {
   name: "Home",
   data() {
     return {
+      tabList3: [
+        {
+          tabTitle: "主页",
+          curr: false,
+          icon:
+            "http://img13.360buyimg.com/uba/jfs/t1/29316/38/1115/3203/5c0f3d61E35d0c7da/9e557f2cb5c9dab6.jpg",
+          activeIcon:
+            "http://img20.360buyimg.com/uba/jfs/t1/9996/36/8646/4833/5c0f3d61E7c1b7e0f/c98ad61124172e93.jpg",
+          href: "/"
+        },
+        {
+          tabTitle: "全部分类",
+          curr: true,
+          icon:
+            "http://img12.360buyimg.com/uba/jfs/t1/25443/23/1062/4600/5c0f3d61E2e9f1360/c9b3421fe18614e2.jpg",
+          activeIcon:
+            "http://img20.360buyimg.com/uba/jfs/t1/19241/12/1048/8309/5c0f3d61E17ed5a56/c3af0964cade47f8.jpg",
+          href: "allCategories"
+        },
+        {
+          tabTitle: "分销中心",
+          curr: false,
+          icon:
+            "http://img13.360buyimg.com/uba/jfs/t1/10361/35/4713/4643/5c0f3d62E437a3c94/273fd0fb90798f03.jpg",
+          activeIcon:
+            "http://img14.360buyimg.com/uba/jfs/t1/26604/35/1073/7896/5c0f3d61Eb9f5f184/5f01c938abe4216d.jpg",
+          href: "distribution"
+        },
+        {
+          tabTitle: "购物车",
+          curr: false,
+          num: 2,
+          icon:
+            "http://img11.360buyimg.com/uba/jfs/t1/14848/18/1066/3723/5c0f41bdE9f2a38fe/e6ed6768717297fb.jpg",
+          activeIcon:
+            "http://img30.360buyimg.com/uba/jfs/t1/17538/16/1070/6214/5c0f41bdE4bc9a1db/74cf978e5015454b.jpg",
+          href: "cart"
+        },
+        {
+          tabTitle: "会员中心",
+          curr: false,
+          icon:
+            "http://img20.360buyimg.com/uba/jfs/t1/20004/20/1045/3620/5c0f3d61Eaaec1670/9e59db63983b7b9f.jpg",
+          activeIcon:
+            "http://img14.360buyimg.com/uba/jfs/t1/23967/14/1072/6714/5c0f3d61E0ad8991e/8f741953f6e38f15.jpg",
+          href: "about"
+        }
+      ],
       positionNavCurr: "top",
       editableTabs: [
         {
@@ -132,8 +161,11 @@ export default {
     iFrameHeight() {
       const deviceHeight = document.body.clientHeight;
       console.log(document.body.clientHeight);
-      this.contentHeight = Number(deviceHeight) - 110;
+      this.contentHeight = Number(deviceHeight) - 108;
       console.log(this.contentHeight);
+    },
+    tabSwitch3(value, index) {
+      console.log(index);
     },
     tabSwitch(index, event) {
       console.log(index + "--" + event);
@@ -151,28 +183,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.footerFixed {
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-}
-.menu {
-  .nut-button {
-    position: relative;
-    height: $btn-menu-height;
-    width: 100%;
-    padding: 0;
-    font-size: $btn-icon-height-small;
-  }
-  .txt-icon {
-    display: block;
-    margin: 0 auto !important;
-    width: $btn-menu-icon-height !important;
-    height: $btn-menu-icon-height !important;
-  }
-  .nut-badge {
-    flex: 1;
-    -webkit-flex: 1;
-  }
+.home .nut-tab {
+  padding: 0;
 }
 </style>
